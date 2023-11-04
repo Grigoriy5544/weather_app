@@ -19,7 +19,7 @@ interface IGetCoordinates {
     country: string
 }
 
-export const getCoordinates = async (cityName: string, limit: number): Promise<IGetCoordinates[]> => {
+export const getCoordinates = async (cityName: string, limit?: number): Promise<IGetCoordinates[]> => {
     const url: string = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName || "New York"}&limit=${limit || 5}&appid=${apiKey}`
     const {data} = await axios.get(url)
 

@@ -5,7 +5,8 @@ import {getWeather} from "../../api/weather.ts";
 import styles from "./Home.module.scss"
 
 const Home = () => {
-    const city = JSON.parse(window.localStorage.getItem('city'))
+    const localCity: string = window.localStorage.getItem("city") || ""
+    const city = JSON.parse(localCity)
     const navigate = useNavigate()
 
     useEffect(() => {

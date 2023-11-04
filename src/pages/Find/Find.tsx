@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {useQuery} from "@tanstack/react-query";
 import {getCoordinates} from "../../api/weather.ts";
 import {Link} from "react-router-dom";
@@ -9,16 +9,20 @@ const Find = () => {
 
     const coordinates = useQuery({queryKey: ['coordinates', value], queryFn: () => getCoordinates(value)})
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (value !== e.target.value && !!e.target.value)
-            coordinates.refetch(e.target.value)
+            { // @ts-ignore
+                coordinates.refetch(e.target.value)
+            }
 
         setValue(e.target.value)
     }
 
     useEffect(() => {
         if (!!value)
-            coordinates.refetch(value)
+            { // @ts-ignore
+                coordinates.refetch(value)
+            }
     }, [value])
 
     return (

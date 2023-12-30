@@ -1,18 +1,18 @@
-import {useEffect} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 import {getWeather} from "../../api/weather.ts";
 import styles from "./Home.module.scss"
 
 const Home = () => {
-    const localCity: string = window.localStorage.getItem("city") || ""
-    const city = JSON.parse(localCity)
-    const navigate = useNavigate()
+    const localCity = window.localStorage.getItem("city")
 
-    useEffect(() => {
-        if (!city)
-            navigate("/find")
-    }, [])
+    if (!localCity) {
+        localStorage.setItem("city", "")
+        return <Navigate to="/find" />
+    }
+
+    const city = JSON.parse(localCity)
+    
 
     const {data, isLoading} = useQuery({
         queryKey: ["weather", city.name + city.lat + city.lon],

@@ -35,10 +35,10 @@ const Find = () => {
                     <>
                         {!coordinates.data[0] && "Not Found"}
                         <div>
-                            {coordinates.data?.map(city =>
-                                <div>
-                                <Link onClick={() => window.localStorage.setItem("city", JSON.stringify(city))} key={city.lat + city.lon} to={"/"}>{city.local_names?.ru || city.name} {city.country}</Link>
-                                <p>{city.state}</p>
+                            {coordinates?.data?.map(city =>
+                                <div key={city.lat}>
+                                <Link onClick={() => window.localStorage.setItem("city", JSON.stringify(city))} to={"/"}>{city.local_names?.ru || city.name} {city.country}</Link>
+                                <p>{city.state}</p> 
                                 </div>
                             )}
                         </div>
